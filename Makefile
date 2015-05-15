@@ -256,6 +256,13 @@ $(MUJSTEST) : $(MUPDF_LIB) $(THIRD_LIBS)
 $(MUJSTEST) : $(MUJSTEST_OBJ)
 	$(LINK_CMD)
 
+MUINFO := $(addprefix $(OUT)/, muinfo)
+MUINFO_OBJ := $(addprefix $(OUT)/tools/, muinfo.o)
+$(MUINFO_OBJ) : $(FITZ_HDR) $(PDF_HDR)
+$(MUINFO) : $(MUPDF_LIB) $(THIRD_LIBS)
+$(MUINFO) : $(MUINFO_OBJ)
+	$(LINK_CMD)
+
 ifeq "$(HAVE_X11)" "yes"
 MUVIEW_X11 := $(OUT)/mupdf-x11
 MUVIEW_X11_OBJ := $(addprefix $(OUT)/platform/x11/, x11_main.o x11_image.o pdfapp.o)
@@ -287,7 +294,7 @@ MUVIEW := $(MUVIEW_X11) $(MUVIEW_WIN32)
 MUVIEW_CURL := $(MUVIEW_X11_CURL) $(MUVIEW_WIN32_CURL)
 
 
-INSTALL_APPS := $(MUDRAW) $(MUTOOL) $(MUVIEW) $(MUJSTEST) $(MUVIEW_CURL)
+INSTALL_APPS := $(MUDRAW) $(MUTOOL) $(MUVIEW) $(MUJSTEST) $(MUVIEW_CURL) $(MUINFO)
 
 # --- Update version string header ---
 

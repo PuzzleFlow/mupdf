@@ -174,6 +174,12 @@ int main(int argc, char **argv)
 	char *filename = argc >= 2 ? argv[1] : "";
 	pdf_document *doc;
 
+	if (argc < 2)
+	{
+		fprintf(stderr, "No filename given. Usage: muinfo /path/to/file.pdf\n");
+		return 1;
+	}
+
 	// Create a context to hold the exception stack and various caches.
 
 	fz_context *ctx = fz_new_context(NULL, NULL, FZ_STORE_UNLIMITED);
